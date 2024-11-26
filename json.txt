@@ -1,6 +1,6 @@
 {
    "tienda": {
-       "nombre": "Mi Tienda Online",
+       "nombre": "CiberZone",
        "categorias": [
            {
                "id": 1,
@@ -84,7 +84,7 @@
            {
                "id": 1,
                "nombre": "Juan Pérez",
-               "email": "juanperez@example.com",
+               "email": "juanperez@gmail.com",
                "direccion": {
                    "calle": "Calle Principal",
                    "numero": 123,
@@ -107,7 +107,7 @@
            {
                "id": 2,
                "nombre": "Ana Gómez",
-               "email": "anagomez@example.com",
+               "email": "anagomez@gmail.com",
                "direccion": {
                    "calle": "Calle Secundaria",
                    "numero": 456,
