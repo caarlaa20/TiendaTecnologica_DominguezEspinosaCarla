@@ -4,6 +4,8 @@
  */
 package com.mycompany.tiendatecnologica;
 
+import java.io.File;
+
 /**
  *
  * @author alumno
@@ -16,6 +18,8 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         new BBDD().getConnection();
+        
+        BBDD.readJSON("src/main/Resources/TIENDA.json");
     }
 
     /**
