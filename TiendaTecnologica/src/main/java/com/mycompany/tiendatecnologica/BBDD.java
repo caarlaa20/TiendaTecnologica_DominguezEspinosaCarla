@@ -70,19 +70,22 @@ public class BBDD {
     }
 
     public static void insertProducto(int idProducto, int idCategoria, String productoNombre, double precio) {
-        Connection connection = getConnection();
-        String insertProductoSQL = "INSERT INTO productos (id_producto, id_categoria, nombre, precio) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(insertProductoSQL)) {
-            preparedStatement.setInt(1, idProducto);
-            preparedStatement.setInt(2, idCategoria);
-            preparedStatement.setString(3, productoNombre);
-            preparedStatement.setDouble(4, precio);
-            preparedStatement.executeUpdate();
-            System.out.println("Producto insertado: " + productoNombre + ", Precio: " + precio);
-        } catch (SQLException e) {
-            System.out.println("Error al insertar producto: " + e.getMessage());
-        }
+    Connection connection = getConnection();
+    String insertProductoSQL = "INSERT INTO productos (id_producto, id_categoria, nombre, precio) VALUES (?, ?, ?, ?)";
+    try (PreparedStatement preparedStatement = connection.prepareStatement(insertProductoSQL)) {
+        preparedStatement.setInt(1, idProducto);
+        preparedStatement.setInt(2, idCategoria);
+        preparedStatement.setString(3, productoNombre);
+        preparedStatement.setDouble(4, precio);
+        preparedStatement.executeUpdate();
+        System.out.println("Producto insertado: " + productoNombre + ", Precio: " + precio);
+    } catch (SQLException e) {
+        // Muestra el error de SQL específico para depuración
+        System.out.println("Error al insertar producto: " + e.getMessage());
+        e.printStackTrace();
     }
+}
+
 
     public static void readJSON(String filePath) {
         JSONParser parser = new JSONParser();
