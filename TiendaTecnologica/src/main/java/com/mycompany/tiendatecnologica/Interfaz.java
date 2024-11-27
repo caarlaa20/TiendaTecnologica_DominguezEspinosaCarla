@@ -4,7 +4,14 @@
  */
 package com.mycompany.tiendatecnologica;
 
+import static com.mycompany.tiendatecnologica.BBDD.getConnection;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,7 +25,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         new BBDD().getConnection();
-        
+
         BBDD.readJSON("src/main/Resources/TIENDA.json");
     }
 
@@ -37,6 +44,8 @@ public class Interfaz extends javax.swing.JFrame {
         Categorias = new javax.swing.JButton();
         Historial = new javax.swing.JButton();
         Usuarios1 = new javax.swing.JButton();
+        informacion = new javax.swing.JLabel();
+        limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,22 +89,40 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        informacion.setText("jLabel1");
+        informacion.setOpaque(true);
+
+        limpiar.setText("Limpiar");
+        limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                 .addGap(46, 321, Short.MAX_VALUE)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addComponent(Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69))
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(Logo)))
-                .addGap(69, 69, 69))
+                        .addComponent(Logo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))))
+            .addGroup(PanelLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(limpiar)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PanelLayout.createSequentialGroup()
                     .addGap(56, 56, 56)
@@ -105,15 +132,27 @@ public class Interfaz extends javax.swing.JFrame {
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)))
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73)
-                .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(50, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(limpiar)
+                        .addGap(60, 60, 60))))
             .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PanelLayout.createSequentialGroup()
                     .addGap(233, 233, 233)
@@ -146,45 +185,26 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_CompraActionPerformed
 
     private void CategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoriasActionPerformed
-        // TODO add your handling code here:
+        cargarCategorias();
     }//GEN-LAST:event_CategoriasActionPerformed
 
     private void Usuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Usuarios1ActionPerformed
-        // TODO add your handling code here:
+        cargarUsuarios();
     }//GEN-LAST:event_Usuarios1ActionPerformed
 
     private void HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_HistorialActionPerformed
 
+    private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
+        informacion.setText("");
+    }//GEN-LAST:event_limpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interfaz().setVisible(true);
@@ -199,5 +219,86 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel Panel;
     private javax.swing.JButton Usuarios1;
+    private javax.swing.JLabel informacion;
+    private javax.swing.JButton limpiar;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarUsuarios() {
+        try (Connection connection = BBDD.getConnection()) {
+            if (connection == null) {
+                informacion.setText("<html>Error: No se pudo establecer conexión con la base de datos.</html>");
+                return;
+            }
+
+            String query = "SELECT * FROM usuarios";
+            StringBuilder usuariosInfo = new StringBuilder("<html>");
+
+            try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+
+                if (!resultSet.isBeforeFirst()) { // Verificar si hay datos
+                    informacion.setText("<html>No hay usuarios registrados en la base de datos.</html>");
+                    return;
+                }
+
+                while (resultSet.next()) {
+                    int idUsuario = resultSet.getInt("id_usuario");
+                    String nombre = resultSet.getString("nombre");
+                    String email = resultSet.getString("email");
+
+                    // Usar etiquetas HTML para separar los campos y los usuarios
+                    usuariosInfo.append("ID: ").append(idUsuario).append("<br>")
+                            .append("Nombre: ").append(nombre).append("<br>")
+                            .append("Email: ").append(email).append("<br><br>");
+                }
+
+                usuariosInfo.append("</html>");
+                informacion.setText(usuariosInfo.toString());
+
+            } catch (SQLException e) {
+                informacion.setText("<html>Error al obtener los usuarios: " + e.getMessage() + "</html>");
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            informacion.setText("<html>Error al conectar con la base de datos: " + e.getMessage() + "</html>");
+            e.printStackTrace();
+        }
+    }
+
+    private void cargarCategorias() {
+        Connection connection = BBDD.getConnection();
+        if (connection == null) {
+            informacion.setText("Error: No se pudo establecer conexión con la base de datos.");
+            return;
+        }
+
+        String query = "SELECT * FROM categorias";
+        StringBuilder categoriasInfo = new StringBuilder();
+
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+
+            if (!resultSet.isBeforeFirst()) { // Verificar si hay datos
+                informacion.setText("No hay categorías registradas en la base de datos.");
+                return;
+            }
+
+            while (resultSet.next()) {
+                int idCategoria = resultSet.getInt("id_categoria");
+                String nombreCategoria = resultSet.getString("nombre");
+
+                // Agregar la información de la categoría con un salto de línea al final
+                categoriasInfo.append("ID: ").append(idCategoria)
+                        .append(", Nombre: ").append(nombreCategoria)
+                        .append("\n");
+            }
+
+            // Establecer el texto en el JLabel
+            informacion.setText("<html>" + categoriasInfo.toString().replaceAll("\n", "<br/>") + "</html>");
+
+        } catch (SQLException e) {
+            informacion.setText("Error al obtener las categorías: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }
+
