@@ -40,12 +40,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         Panel = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
-        Compra = new javax.swing.JButton();
+        Comprar = new javax.swing.JButton();
         Categorias = new javax.swing.JButton();
         Historial = new javax.swing.JButton();
         Usuarios1 = new javax.swing.JButton();
         informacion = new javax.swing.JLabel();
         limpiar = new javax.swing.JButton();
+        Productos1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,12 +54,12 @@ public class Interfaz extends javax.swing.JFrame {
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoSample_ByTailorBrands.jpg"))); // NOI18N
 
-        Compra.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        Compra.setText("Hacer Compra");
-        Compra.setBorder(null);
-        Compra.addActionListener(new java.awt.event.ActionListener() {
+        Comprar.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        Comprar.setText("Hacer Compra");
+        Comprar.setBorder(null);
+        Comprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CompraActionPerformed(evt);
+                ComprarActionPerformed(evt);
             }
         });
 
@@ -89,9 +90,10 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        informacion.setText("jLabel1");
+        informacion.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         informacion.setOpaque(true);
 
+        limpiar.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         limpiar.setText("Limpiar");
         limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,90 +101,83 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        Productos1.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        Productos1.setText("Productos");
+        Productos1.setBorder(null);
+        Productos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Productos1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                .addGap(46, 321, Short.MAX_VALUE)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addComponent(Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69)
-                        .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(Logo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))))
             .addGroup(PanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(limpiar)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelLayout.createSequentialGroup()
-                    .addGap(56, 56, 56)
-                    .addComponent(Usuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(603, Short.MAX_VALUE)))
+                .addGap(39, 39, 39)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(limpiar)
+                        .addGap(111, 111, 111))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addComponent(Usuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addComponent(Logo)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                                .addComponent(Productos1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Comprar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47))))))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)))
+                .addGap(18, 18, 18)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Categorias, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(50, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(limpiar)
-                        .addGap(60, 60, 60))))
-            .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(PanelLayout.createSequentialGroup()
-                    .addGap(233, 233, 233)
+                    .addComponent(Historial, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Usuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(270, Short.MAX_VALUE)))
+                    .addComponent(Productos1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Comprar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(482, 482, 482))
+            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CompraActionPerformed
+    private void ComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarActionPerformed
+
+    }//GEN-LAST:event_ComprarActionPerformed
 
     private void CategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoriasActionPerformed
         cargarCategorias();
@@ -193,12 +188,16 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_Usuarios1ActionPerformed
 
     private void HistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialActionPerformed
-        // TODO add your handling code here:
+     cargarHistorialCompras();
     }//GEN-LAST:event_HistorialActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
         informacion.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
+
+    private void Productos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Productos1ActionPerformed
+        cargarProductos();
+    }//GEN-LAST:event_Productos1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,10 +213,11 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Categorias;
-    private javax.swing.JButton Compra;
+    private javax.swing.JButton Comprar;
     private javax.swing.JButton Historial;
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel Panel;
+    private javax.swing.JButton Productos1;
     private javax.swing.JButton Usuarios1;
     private javax.swing.JLabel informacion;
     private javax.swing.JButton limpiar;
@@ -300,5 +300,93 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
 
-}
+    private void cargarProductos() {
+        Connection connection = BBDD.getConnection();
+        if (connection == null) {
+            informacion.setText("Error: No se pudo establecer conexión con la base de datos.");
+            return;
+        }
 
+        String query = "SELECT p.id_producto, p.nombre, p.precio, p.inventario, c.nombre AS categoria "
+                + "FROM productos p "
+                + "JOIN categorias c ON p.id_categoria = c.id_categoria";
+        StringBuilder productosInfo = new StringBuilder();
+
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+
+            if (!resultSet.isBeforeFirst()) { // Verificar si hay datos
+                informacion.setText("No hay productos registrados en la base de datos.");
+                return;
+            }
+
+            while (resultSet.next()) {
+                int idProducto = resultSet.getInt("id_producto");
+                String nombreProducto = resultSet.getString("nombre");
+                double precio = resultSet.getDouble("precio");
+                int inventario = resultSet.getInt("inventario");
+                String categoria = resultSet.getString("categoria");
+
+                // Agregar la información del producto con un salto de línea al final
+                productosInfo.append("ID: ").append(idProducto)
+                        .append(", Nombre: ").append(nombreProducto)
+                        .append(", Precio: ").append(precio)
+                        .append(", Inventario: ").append(inventario)
+                        .append(", Categoría: ").append(categoria)
+                        .append("\n");
+            }
+
+            // Establecer el texto en el JLabel
+            informacion.setText("<html>" + productosInfo.toString().replaceAll("\n", "<br/>") + "</html>");
+
+        } catch (SQLException e) {
+            informacion.setText("Error al obtener los productos: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void cargarHistorialCompras() {
+        Connection connection = BBDD.getConnection();
+        if (connection == null) {
+            informacion.setText("Error: No se pudo establecer conexión con la base de datos.");
+            return;
+        }
+
+        String query = "SELECT h.id_compra, u.nombre AS usuario, p.nombre AS producto, h.cantidad, h.fecha "
+                + "FROM historial_compras h "
+                + "JOIN usuarios u ON h.id_usuario = u.id_usuario "
+                + "JOIN productos p ON h.id_producto = p.id_producto";
+        StringBuilder historialInfo = new StringBuilder();
+
+        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+
+            if (!resultSet.isBeforeFirst()) { // Verificar si hay datos
+                informacion.setText("No hay historial de compras registrado en la base de datos.");
+                return;
+            }
+
+            while (resultSet.next()) {
+                int idCompra = resultSet.getInt("id_compra");
+                String usuario = resultSet.getString("usuario");
+                String producto = resultSet.getString("producto");
+                int cantidad = resultSet.getInt("cantidad");
+                String fecha = resultSet.getString("fecha");
+
+                // Agregar la información de la compra con un salto de línea al final
+                historialInfo.append("ID Compra: ").append(idCompra)
+                        .append(", Usuario: ").append(usuario)
+                        .append(", Producto: ").append(producto)
+                        .append(", Cantidad: ").append(cantidad)
+                        .append(", Fecha: ").append(fecha)
+                        .append("\n");
+            }
+
+            // Establecer el texto en el JLabel
+            informacion.setText("<html>" + historialInfo.toString().replaceAll("\n", "<br/>") + "</html>");
+
+        } catch (SQLException e) {
+            informacion.setText("Error al obtener el historial de compras: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+}

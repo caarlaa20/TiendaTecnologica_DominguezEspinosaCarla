@@ -127,20 +127,19 @@ public class BBDD {
     }
 }
 
-    public static void insertHistorialCompra(int idCompra, int idUsuario, int idProducto, int cantidad, String fecha) {
+    public static void insertHistorialCompra(int idUsuario, int idProducto, int cantidad, String fecha) {
     if (!verificarProductoExiste(idProducto)) {
         System.out.println("Error: El producto con id " + idProducto + " no existe en la base de datos.");
         return; // No insertamos si el producto no existe
     }
 
     Connection connection = getConnection();
-    String insertHistorialSQL = "INSERT INTO historial_compras (id_compra, id_usuario, id_producto, cantidad, fecha) VALUES (?, ?, ?, ?, ?)";
+    String insertHistorialSQL = "INSERT INTO historial_compras (id_usuario, id_producto, cantidad, fecha) VALUES (?, ?, ?, ?)";
     try (PreparedStatement preparedStatement = connection.prepareStatement(insertHistorialSQL)) {
-        preparedStatement.setInt(1, idCompra);
-        preparedStatement.setInt(2, idUsuario);
-        preparedStatement.setInt(3, idProducto);
-        preparedStatement.setInt(4, cantidad);
-        preparedStatement.setString(5, fecha);
+        preparedStatement.setInt(1, idUsuario);
+        preparedStatement.setInt(2, idProducto);
+        preparedStatement.setInt(3, cantidad);
+        preparedStatement.setString(4, fecha);
         preparedStatement.executeUpdate();
         System.out.println("Compra insertada: Usuario " + idUsuario + ", Producto " + idProducto);
     } catch (SQLException e) {
@@ -169,15 +168,14 @@ public class BBDD {
                 insertCategoria(categoriaId++, categoriaNombre);
 
                 JSONArray productos = (JSONArray) categoria.get("productos");
-                int productoId = 1; 
                 for (Object productoObj : productos) {
                     JSONObject producto = (JSONObject) productoObj;
+                    int idp = ((Long) producto.get("id")).intValue();
                     String productoNombre = (String) producto.get("nombre");
                     double precio = (double) producto.get("precio");
-                    insertProducto(productoId++, categoriaId - 1, productoNombre, precio);
+                    insertProducto(idp, categoriaId - 1, productoNombre, precio);
                 }
             }
-
             JSONArray usuarios = (JSONArray) tienda.get("usuarios");
             for (Object usuarioObj : usuarios) {
                 JSONObject usuario = (JSONObject) usuarioObj;
@@ -195,13 +193,13 @@ public class BBDD {
                 insertDireccion(idDireccion, idUsuario, calle, numero, ciudad, pais);
 
                 JSONArray historialCompras = (JSONArray) usuario.get("historialCompras");
-                int compraId = 1;
                 for (Object compraObj : historialCompras) {
+                    
                     JSONObject compra = (JSONObject) compraObj;
                     int productoId = ((Long) compra.get("productoId")).intValue();
                     int cantidad = ((Long) compra.get("cantidad")).intValue();
                     String fecha = (String) compra.get("fecha");
-                    insertHistorialCompra(compraId++, idUsuario, productoId, cantidad, fecha);
+                    insertHistorialCompra(idUsuario, productoId, cantidad, fecha);
                 }
             }
 
