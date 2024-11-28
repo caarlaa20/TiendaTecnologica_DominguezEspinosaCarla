@@ -4,6 +4,12 @@
  */
 package com.mycompany.tiendatecnologica;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JTextField;
+
 /**
  *
  * @author alumno
@@ -28,38 +34,128 @@ public class Comprar extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        LblUsuario = new javax.swing.JTextField();
+        LblCantidad = new javax.swing.JTextField();
+        LblProducto = new javax.swing.JTextField();
+        Usuario = new javax.swing.JLabel();
+        Producto = new javax.swing.JLabel();
+        Cantidad = new javax.swing.JLabel();
+        informacion = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(189, 149, 202));
         jPanel1.setPreferredSize(new java.awt.Dimension(1154, 666));
 
-        jButton1.setText("jButton1");
+        jButton1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jButton1.setText("Finalizar Compra");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
+        LblUsuario.setToolTipText("");
+        LblUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LblUsuarioActionPerformed(evt);
+            }
+        });
+
+        LblCantidad.setToolTipText("");
+        LblCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LblCantidadActionPerformed(evt);
+            }
+        });
+
+        LblProducto.setToolTipText("");
+        LblProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LblProductoActionPerformed(evt);
+            }
+        });
+
+        Usuario.setFont(new java.awt.Font("Courier New", 1, 16)); // NOI18N
+        Usuario.setForeground(new java.awt.Color(255, 255, 255));
+        Usuario.setText("ID Usuario");
+        Usuario.setToolTipText("");
+
+        Producto.setFont(new java.awt.Font("Courier New", 1, 16)); // NOI18N
+        Producto.setForeground(new java.awt.Color(255, 255, 255));
+        Producto.setText("ID Productos");
+
+        Cantidad.setFont(new java.awt.Font("Courier New", 1, 16)); // NOI18N
+        Cantidad.setForeground(new java.awt.Color(255, 255, 255));
+        Cantidad.setText("Cantidad");
+
+        informacion.setOpaque(true);
+
+        jButton2.setBackground(new java.awt.Color(204, 51, 255));
+        jButton2.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("<");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(768, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(311, 311, 311))
+                .addGap(123, 123, 123))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(305, 305, 305)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Usuario)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Producto)
+                            .addComponent(Cantidad))
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(199, 199, 199)
-                .addComponent(jButton1)
-                .addContainerGap(308, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Usuario))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Producto))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Cantidad))
+                        .addGap(96, 96, 96))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -78,6 +174,38 @@ public class Comprar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void LblUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LblUsuarioActionPerformed
+        JTextField campoBusqueda = this.LblUsuario;
+        seleccionarIdProducto(campoBusqueda);
+    }//GEN-LAST:event_LblUsuarioActionPerformed
+
+    private void LblProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LblProductoActionPerformed
+      JTextField campoBusqueda = this.LblProducto;  // Asegúrate de usar el nombre correcto de tu JTextField
+
+    // Llamar al método para seleccionar el ID del producto
+    seleccionarIdProductoPorId(campoBusqueda);
+    }//GEN-LAST:event_LblProductoActionPerformed
+
+    private void LblCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LblCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LblCantidadActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Interfaz interfaz = new Interfaz();
+        interfaz.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JTextField campoIdProducto = this.LblProducto; 
+        JTextField campoCantidad = this.LblCantidad;
+        JTextField campoIdUsuario = this.LblUsuario;
+
+        // Llamar al método que maneja la compra
+        finalizarCompra(campoIdProducto, campoCantidad, campoIdUsuario);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,9 +242,204 @@ public class Comprar extends javax.swing.JFrame {
         });
     }
 
+    private void finalizarCompra(JTextField campoIdProducto, JTextField campoCantidad, JTextField campoIdUsuario) {
+        // Obtener los valores desde los JTextFields
+        int idProducto = Integer.parseInt(campoIdProducto.getText().trim());
+        int cantidad = Integer.parseInt(campoCantidad.getText().trim());
+        int idUsuario = Integer.parseInt(campoIdUsuario.getText().trim());
+
+        // Verificar si el producto existe
+        if (!verificarProductoExiste(idProducto)) {
+            System.out.println("Error: El producto con ID " + idProducto + " no existe.");
+            return; // Si no existe el producto, terminamos el proceso
+        }
+
+        // Insertar el historial de compra
+        try {
+            // Obtener la fecha actual
+            java.sql.Date fecha = new java.sql.Date(System.currentTimeMillis());
+
+            // Insertar la compra en la base de datos
+            insertHistorialCompra(idUsuario, idProducto, cantidad, fecha.toString());
+
+            System.out.println("Compra realizada correctamente.");
+        } catch (SQLException e) {
+            System.out.println("Error al guardar la compra: " + e.getMessage());
+        }
+    }
+
+    private boolean verificarProductoExiste(int idProducto) {
+        Connection connection = BBDD.getConnection();
+        String query = "SELECT id_producto FROM productos WHERE id_producto = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idProducto);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next(); // Devuelve true si el producto existe
+        } catch (SQLException e) {
+            System.out.println("Error al verificar el producto: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private void insertHistorialCompra(int idUsuario, int idProducto, int cantidad, String fecha) throws SQLException {
+        Connection connection = BBDD.getConnection();
+        String query = "INSERT INTO historial_compras (id_usuario, id_producto, cantidad, fecha) VALUES (?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idUsuario);
+            preparedStatement.setInt(2, idProducto);
+            preparedStatement.setInt(3, cantidad);
+            preparedStatement.setString(4, fecha);
+            preparedStatement.executeUpdate(); // Realiza la inserción
+        }
+    }
+
+    private void seleccionarIdProducto(JTextField campoBusqueda) {
+        Connection connection = BBDD.getConnection();
+        if (connection == null) {
+            informacion.setText("Error: No se pudo establecer conexión con la base de datos.");
+            return;
+        }
+
+        // Obtener el texto del JTextField
+        String criterio = campoBusqueda.getText().trim();
+        if (criterio.isEmpty()) {
+            informacion.setText("Por favor, ingresa un criterio de búsqueda.");
+            return;
+        }
+
+        // Consulta SQL simple para obtener el ID del producto
+        String query = "SELECT id_producto FROM productos WHERE nombre LIKE ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + criterio + "%"); // Criterio con comodines para coincidencias parciales
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int idProducto = resultSet.getInt("id_producto");
+                System.out.println("ID Producto: " + idProducto);  // Aquí se obtiene el ID del producto
+            }
+
+        } catch (SQLException e) {
+            informacion.setText("Error al obtener el ID del producto: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void seleccionarIdProductoPorId(JTextField campoBusqueda) {
+    Connection connection = BBDD.getConnection();
+    if (connection == null) {
+        System.out.println("Error: No se pudo establecer conexión con la base de datos.");
+        return;
+    }
+
+    // Obtener el texto del JTextField
+    String criterio = campoBusqueda.getText().trim();
+    if (criterio.isEmpty()) {
+        System.out.println("Por favor, ingresa un ID de producto.");
+        return;
+    }
+
+    // Comprobar si el texto ingresado es un número entero
+    int idProducto;
+    try {
+        idProducto = Integer.parseInt(criterio);  // Convierte el texto en un entero
+    } catch (NumberFormatException e) {
+        System.out.println("El ID debe ser un número entero.");
+        return;
+    }
+
+    // Consulta SQL para verificar si el ID de producto existe
+    String query = "SELECT id_producto FROM productos WHERE id_producto = ?";
+
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        preparedStatement.setInt(1, idProducto);  // Usamos el ID para la búsqueda
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        // Verificar si el producto existe en la base de datos
+        if (resultSet.next()) {
+            System.out.println("Producto con ID " + idProducto + " encontrado.");
+            // Aquí puedes agregar el producto al historial de compras si es necesario
+        } else {
+            System.out.println("Error: Producto con ID " + idProducto + " no encontrado.");
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al obtener el producto: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+    private void seleccionarCantidad(JTextField campoCantidad, int idProducto) {
+    Connection connection = BBDD.getConnection();
+    if (connection == null) {
+        System.out.println("Error: No se pudo establecer conexión con la base de datos.");
+        return;
+    }
+
+    // Obtener el texto del JTextField (la cantidad ingresada por el usuario)
+    String cantidadStr = campoCantidad.getText().trim();
+    if (cantidadStr.isEmpty()) {
+        System.out.println("Por favor, ingresa una cantidad.");
+        return;
+    }
+
+    // Comprobar si la cantidad ingresada es un número entero positivo
+    int cantidad;
+    try {
+        cantidad = Integer.parseInt(cantidadStr);  // Convierte el texto en un entero
+        if (cantidad <= 0) {
+            System.out.println("La cantidad debe ser un número positivo.");
+            return;
+        }
+    } catch (NumberFormatException e) {
+        System.out.println("La cantidad debe ser un número entero.");
+        return;
+    }
+
+    // Consulta SQL para verificar si el producto existe y obtener su inventario
+    String query = "SELECT inventario FROM productos WHERE id_producto = ?";
+
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        preparedStatement.setInt(1, idProducto);  // Usamos el ID para la búsqueda
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        // Verificar si el producto existe en la base de datos
+        if (resultSet.next()) {
+            int inventario = resultSet.getInt("inventario");
+            System.out.println("Producto con ID " + idProducto + " encontrado. Inventario disponible: " + inventario);
+
+            // Verificar si hay suficiente inventario
+            if (cantidad > inventario) {
+                System.out.println("Error: No hay suficiente inventario para esta cantidad. Inventario disponible: " + inventario);
+                return;  // Salir del método si no hay suficiente inventario
+            } else {
+                System.out.println("Cantidad seleccionada: " + cantidad);
+                // Aquí puedes proceder a guardar la compra en el historial de compras
+            }
+        } else {
+            System.out.println("Error: Producto con ID " + idProducto + " no encontrado.");
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error al verificar el inventario: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Cantidad;
+    private javax.swing.JTextField LblCantidad;
+    private javax.swing.JTextField LblProducto;
+    private javax.swing.JTextField LblUsuario;
+    private javax.swing.JLabel Producto;
+    private javax.swing.JLabel Usuario;
+    private javax.swing.JLabel informacion;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

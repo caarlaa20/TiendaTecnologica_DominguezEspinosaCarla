@@ -25,8 +25,10 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         new BBDD().getConnection();
-
-        BBDD.readJSON("src/main/Resources/TIENDA.json");
+        if(!BBDD.hayDatos()){
+          BBDD.readJSON("src/main/Resources/TIENDA.json");  
+        }
+        
     }
 
     /**
@@ -176,7 +178,9 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarActionPerformed
-
+        Comprar comprar=new Comprar();
+        comprar.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_ComprarActionPerformed
 
     private void CategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CategoriasActionPerformed

@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -67,14 +68,15 @@ public class BBDD {
         }
     }
 
-    public static void insertProducto(int idProducto, int idCategoria, String productoNombre, double precio) {
+    public static void insertProducto(int idProducto, int idCategoria, String productoNombre, double precio, int inventario) {
         Connection connection = getConnection();
-        String insertProductoSQL = "INSERT INTO productos (id_producto, id_categoria, nombre, precio) VALUES (?, ?, ?, ?)";
+        String insertProductoSQL = "INSERT INTO productos (id_producto, id_categoria, nombre, precio, inventario) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertProductoSQL)) {
             preparedStatement.setInt(1, idProducto);
             preparedStatement.setInt(2, idCategoria);
             preparedStatement.setString(3, productoNombre);
             preparedStatement.setDouble(4, precio);
+            preparedStatement.setDouble(5, inventario);
             preparedStatement.executeUpdate();
             System.out.println("Producto insertado: " + productoNombre + ", Precio: " + precio);
         } catch (SQLException e) {
@@ -173,7 +175,8 @@ public class BBDD {
                     int idp = ((Long) producto.get("id")).intValue();
                     String productoNombre = (String) producto.get("nombre");
                     double precio = (double) producto.get("precio");
-                    insertProducto(idp, categoriaId - 1, productoNombre, precio);
+                    int inventario = ((Long) producto.get("inventario")).intValue();
+                    insertProducto(idp, categoriaId - 1, productoNombre, precio, inventario);
                 }
             }
             JSONArray usuarios = (JSONArray) tienda.get("usuarios");
@@ -212,8 +215,16 @@ public class BBDD {
         }
     }
 
-    public static void main(String[] args) {
-        // Cambia la ruta al archivo JSON si es necesario
-        //readJSON("ruta_al_archivo.json");
+
+    static boolean hayDatos() {
+        Connection connection = getConnection();
+        String sql="SELECT * FROM historial_compras";
+        try (Statement st=connection.createStatement()) {
+            ResultSet rs = st.executeQuery(sql);
+            return rs.next();
+        } catch (SQLException e) {
+            System.out.println("Error al verificar el producto: " + e.getMessage());
+            return false;
+        }
     }
 }
