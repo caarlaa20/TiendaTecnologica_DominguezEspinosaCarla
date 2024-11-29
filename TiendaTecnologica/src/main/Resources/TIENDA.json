@@ -44,6 +44,32 @@
                        },
                        "imagenes": ["imagen5.jpg", "imagen6.jpg"],
                        "inventario": 25
+                   },
+                   {
+                       "id": 104,
+                       "nombre": "Televisor 4K",
+                       "precio": 799.99,
+                       "descripcion": "Televisor de 55 pulgadas con resolución 4K.",
+                       "caracteristicas": {
+                           "pantalla": "55 pulgadas",
+                           "resolucion": "4K",
+                           "puertos": "3 HDMI, 2 USB"
+                       },
+                       "imagenes": ["imagen11.jpg", "imagen12.jpg"],
+                       "inventario": 8
+                   },
+                   {
+                       "id": 105,
+                       "nombre": "Reloj Inteligente",
+                       "precio": 199.99,
+                       "descripcion": "Reloj inteligente con monitoreo de salud.",
+                       "caracteristicas": {
+                           "pantalla": "1.4 pulgadas",
+                           "bateria": "7 días de autonomía",
+                           "compatible": "iOS y Android"
+                       },
+                       "imagenes": ["imagen13.jpg", "imagen14.jpg"],
+                       "inventario": 30
                    }
                ]
            },
@@ -76,6 +102,45 @@
                        },
                        "imagenes": ["imagen9.jpg", "imagen10.jpg"],
                        "inventario": 50
+                   },
+                   {
+                       "id": 203,
+                       "nombre": "Ventilador Torre",
+                       "precio": 99.99,
+                       "descripcion": "Ventilador de torre con 3 velocidades y control remoto.",
+                       "caracteristicas": {
+                           "velocidades": "3",
+                           "ruido": "Bajo",
+                           "peso": "3 kg"
+                       },
+                       "imagenes": ["imagen15.jpg", "imagen16.jpg"],
+                       "inventario": 20
+                   },
+                   {
+                       "id": 204,
+                       "nombre": "Plancha a Vapor",
+                       "precio": 49.99,
+                       "descripcion": "Plancha a vapor con suela de cerámica.",
+                       "caracteristicas": {
+                           "potencia": "1800W",
+                           "capacidad": "300 ml",
+                           "funcion": "Autolimpieza"
+                       },
+                       "imagenes": ["imagen17.jpg", "imagen18.jpg"],
+                       "inventario": 40
+                   },
+                   {
+                       "id": 205,
+                       "nombre": "Microondas Digital",
+                       "precio": 159.99,
+                       "descripcion": "Microondas digital con 5 niveles de potencia.",
+                       "caracteristicas": {
+                           "potencia": "700W",
+                           "capacidad": "25L",
+                           "funcion": "Descongelado rápido"
+                       },
+                       "imagenes": ["imagen19.jpg", "imagen20.jpg"],
+                       "inventario": 12
                    }
                ]
            }
@@ -124,6 +189,155 @@
                        "productoId": 101,
                        "cantidad": 1,
                        "fecha": "2023-11-17"
+                   }
+               ]
+           },
+           {
+               "id": 3,
+               "nombre": "Carlos Ruiz",
+               "email": "carlosruiz@gmail.com",
+               "direccion": {
+                   "calle": "Calle Las Flores",
+                   "numero": 789,
+                   "ciudad": "Sevilla",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 102,
+                       "cantidad": 1,
+                       "fecha": "2023-11-10"
+                   }
+               ]
+           },
+           {
+               "id": 4,
+               "nombre": "Laura Torres",
+               "email": "lauratorres@gmail.com",
+               "direccion": {
+                   "calle": "Avenida Libertad",
+                   "numero": 101,
+                   "ciudad": "Valencia",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 105,
+                       "cantidad": 1,
+                       "fecha": "2023-11-05"
+                   },
+                   {
+                       "productoId": 202,
+                       "cantidad": 2,
+                       "fecha": "2023-11-08"
+                   }
+               ]
+           },
+           {
+               "id": 5,
+               "nombre": "Pedro Díaz",
+               "email": "pedro.diaz@gmail.com",
+               "direccion": {
+                   "calle": "Calle del Sol",
+                   "numero": 555,
+                   "ciudad": "Zaragoza",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 204,
+                       "cantidad": 1,
+                       "fecha": "2023-11-12"
+                   }
+               ]
+           },
+           {
+               "id": 6,
+               "nombre": "Sofia Martínez",
+               "email": "sofia.martinez@gmail.com",
+               "direccion": {
+                   "calle": "Calle de la Luna",
+                   "numero": 300,
+                   "ciudad": "Murcia",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 103,
+                       "cantidad": 2,
+                       "fecha": "2023-11-13"
+                   }
+               ]
+           },
+           {
+               "id": 7,
+               "nombre": "Miguel Gómez",
+               "email": "miguel.gomez@gmail.com",
+               "direccion": {
+                   "calle": "Calle Mayor",
+                   "numero": 222,
+                   "ciudad": "Bilbao",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 101,
+                       "cantidad": 1,
+                       "fecha": "2023-11-10"
+                   }
+               ]
+           },
+           {
+               "id": 8,
+               "nombre": "Isabel García",
+               "email": "isabel.garcia@gmail.com",
+               "direccion": {
+                   "calle": "Avenida de la Paz",
+                   "numero": 44,
+                   "ciudad": "Valencia",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 205,
+                       "cantidad": 1,
+                       "fecha": "2023-11-11"
+                   }
+               ]
+           },
+           {
+               "id": 9,
+               "nombre": "Felipe González",
+               "email": "felipe.gonzalez@gmail.com",
+               "direccion": {
+                   "calle": "Calle Santa Teresa",
+                   "numero": 909,
+                   "ciudad": "Vigo",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 202,
+                       "cantidad": 2,
+                       "fecha": "2023-11-14"
+                   }
+               ]
+           },
+           {
+               "id": 10,
+               "nombre": "Verónica Pérez",
+               "email": "veronica.perez@gmail.com",
+               "direccion": {
+                   "calle": "Calle Libertad",
+                   "numero": 99,
+                   "ciudad": "Madrid",
+                   "pais": "España"
+               },
+               "historialCompras": [
+                   {
+                       "productoId": 104,
+                       "cantidad": 1,
+                       "fecha": "2023-11-15"
                    }
                ]
            }

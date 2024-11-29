@@ -23,14 +23,19 @@ public class Interfaz extends javax.swing.JFrame {
      * Creates new form Interfaz
      */
     public Interfaz() {
-        initComponents();
-        new BBDD().getConnection();
-        if(!BBDD.hayDatos()){
-          BBDD.readJSON("src/main/Resources/TIENDA.json");  
-        }
-        
+        init(); 
     }
 
+    public void init(){
+
+        if (!BBDD.hayDatos()) {
+            BBDD.readJSON("src/main/Resources/TIENDA.json");
+        }
+        setUndecorated(true);
+        setResizable(false);
+        initComponents();
+        setLocationRelativeTo(null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,29 +46,37 @@ public class Interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         Panel = new javax.swing.JPanel();
-        informacion = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         categoriasProductos = new javax.swing.JLabel();
         usuarios1 = new javax.swing.JLabel();
         HistorialCompras = new javax.swing.JLabel();
         Productos = new javax.swing.JLabel();
         HacerCompra1 = new javax.swing.JLabel();
         Limpiar = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        informacion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Panel.setBackground(new java.awt.Color(0, 204, 204));
 
-        informacion.setBackground(new java.awt.Color(255, 255, 255));
-        informacion.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        informacion.setText("     Informacion...");
-        informacion.setOpaque(true);
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setRequestFocusEnabled(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.PNG"))); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(0, 204, 204));
+        jButton1.setFont(new java.awt.Font("Courier New", 0, 36)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("X");
+        jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,20 +85,27 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(511, 511, 511))
+                .addGap(412, 412, 412)
+                .addComponent(jButton1)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(15, 15, 15))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(37, 37, 37))))
         );
 
         categoriasProductos.setBackground(new java.awt.Color(255, 255, 255));
         categoriasProductos.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         categoriasProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        categoriasProductos.setText("Categorias de productos");
+        categoriasProductos.setText("Categorias de Productos");
         categoriasProductos.setOpaque(true);
         categoriasProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -148,6 +168,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        informacion.setEditable(false);
+        informacion.setBackground(new java.awt.Color(255, 255, 255));
+        informacion.setColumns(20);
+        informacion.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        informacion.setRows(5);
+        jScrollPane1.setViewportView(informacion);
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
@@ -161,15 +188,14 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(categoriasProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Productos, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(HacerCompra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(201, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(403, 403, 403))))
+                        .addGap(328, 328, 328))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93))))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +212,9 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(HistorialCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Productos, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(informacion, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)))
                 .addGap(18, 18, 18)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HacerCompra1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,11 +237,11 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void categoriasProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriasProductosMouseClicked
-      cargarCategorias();
+        cargarCategorias();
     }//GEN-LAST:event_categoriasProductosMouseClicked
 
     private void usuarios1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuarios1MouseClicked
-       cargarUsuarios();
+        cargarUsuarios();
     }//GEN-LAST:event_usuarios1MouseClicked
 
     private void HistorialComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HistorialComprasMouseClicked
@@ -225,14 +253,18 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_ProductosMouseClicked
 
     private void HacerCompra1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HacerCompra1MouseClicked
-       Comprar comprar=new Comprar();
+        Comprar comprar = new Comprar();
         comprar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_HacerCompra1MouseClicked
 
     private void LimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseClicked
-       informacion.setText("");
+        informacion.setText("");
     }//GEN-LAST:event_LimpiarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,49 +285,52 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel Panel;
     private javax.swing.JLabel Productos;
     private javax.swing.JLabel categoriasProductos;
-    private javax.swing.JLabel informacion;
+    private javax.swing.JTextArea informacion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel usuarios1;
     // End of variables declaration//GEN-END:variables
 
     private void cargarUsuarios() {
         try (Connection connection = BBDD.getConnection()) {
             if (connection == null) {
-                informacion.setText("<html>Error: No se pudo establecer conexión con la base de datos.</html>");
+                informacion.setText("Error: No se pudo establecer conexión con la base de datos.");
                 return;
             }
 
             String query = "SELECT * FROM usuarios";
-            StringBuilder usuariosInfo = new StringBuilder("<html>");
+            StringBuilder usuariosInfo = new StringBuilder();
 
             try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
 
                 if (!resultSet.isBeforeFirst()) { // Verificar si hay datos
-                    informacion.setText("<html>No hay usuarios registrados en la base de datos.</html>");
+                    informacion.setText("No hay usuarios registrados en la base de datos.");
                     return;
                 }
+
+                // Cabecera de la tabla
+                usuariosInfo.append(String.format("     %-10s \t %-20s \t %-30s\n", "ID ", "Nombre", "Email"));
+                usuariosInfo.append("-----------------------------------------------------------------------------------------------------\n");
 
                 while (resultSet.next()) {
                     int idUsuario = resultSet.getInt("id_usuario");
                     String nombre = resultSet.getString("nombre");
                     String email = resultSet.getString("email");
 
-                    // Usar etiquetas HTML para separar los campos y los usuarios
-                    usuariosInfo.append("ID: ").append(idUsuario).append("<br>")
-                            .append("Nombre: ").append(nombre).append("<br>")
-                            .append("Email: ").append(email).append("<br><br>");
+                    // Información del usuario
+                    usuariosInfo.append(String.format("     %-10d \t %-20s \t %-30s\n", idUsuario, nombre, email));
                 }
 
-                usuariosInfo.append("</html>");
                 informacion.setText(usuariosInfo.toString());
 
             } catch (SQLException e) {
-                informacion.setText("<html>Error al obtener los usuarios: " + e.getMessage() + "</html>");
+                informacion.setText("Error al obtener los usuarios: " + e.getMessage());
                 e.printStackTrace();
             }
         } catch (SQLException e) {
-            informacion.setText("<html>Error al conectar con la base de datos: " + e.getMessage() + "</html>");
+            informacion.setText("Error al conectar con la base de datos: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -317,18 +352,19 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
 
+            // Cabecera de la tabla
+            categoriasInfo.append(String.format("     %-10s \t %-20s\n", "ID ", "Nombre"));
+            categoriasInfo.append("--------------------------------------------------------------------------------\n");
+
             while (resultSet.next()) {
                 int idCategoria = resultSet.getInt("id_categoria");
                 String nombreCategoria = resultSet.getString("nombre");
 
-                // Agregar la información de la categoría con un salto de línea al final
-                categoriasInfo.append("ID: ").append(idCategoria)
-                        .append(", Nombre: ").append(nombreCategoria)
-                        .append("\n");
+                // Información de la categoría
+                categoriasInfo.append(String.format("     %-10d \t %-20s\n", idCategoria, nombreCategoria));
             }
 
-            // Establecer el texto en el JLabel
-            informacion.setText("<html>" + categoriasInfo.toString().replaceAll("\n", "<br/>") + "</html>");
+            informacion.setText(categoriasInfo.toString());
 
         } catch (SQLException e) {
             informacion.setText("Error al obtener las categorías: " + e.getMessage());
@@ -355,6 +391,10 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
 
+            // Cabecera de la tabla
+            productosInfo.append(String.format("     %-10s \t %-20s \t %-10s \t %-15s \t %-20s\n", "ID ", "Nombre", "Precio", "Inventario", "Categoria"));
+            productosInfo.append("----------------------------------------------------------------------------------------------------------\n");
+
             while (resultSet.next()) {
                 int idProducto = resultSet.getInt("id_producto");
                 String nombreProducto = resultSet.getString("nombre");
@@ -362,17 +402,11 @@ public class Interfaz extends javax.swing.JFrame {
                 int inventario = resultSet.getInt("inventario");
                 String categoria = resultSet.getString("categoria");
 
-                // Agregar la información del producto con un salto de línea al final
-                productosInfo.append("ID: ").append(idProducto)
-                        .append(", Nombre: ").append(nombreProducto)
-                        .append(", Precio: ").append(precio)
-                        .append(", Inventario: ").append(inventario)
-                        .append(", Categoría: ").append(categoria)
-                        .append("\n");
+                // Información del producto
+                productosInfo.append(String.format("     %-10d \t %-20s \t %-10.2f \t %-15d \t %-20s\n", idProducto, nombreProducto, precio, inventario, categoria));
             }
 
-            // Establecer el texto en el JLabel
-            informacion.setText("<html>" + productosInfo.toString().replaceAll("\n", "<br/>") + "</html>");
+            informacion.setText(productosInfo.toString());
 
         } catch (SQLException e) {
             informacion.setText("Error al obtener los productos: " + e.getMessage());
@@ -400,6 +434,11 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
 
+            // Encabezado con formato
+            historialInfo.append(String.format("     %-10s \t %-20s \t %-20s \t %-10s \t %-20s\n", "ID ", "Usuario", "Producto", "Cantidad", "Fecha"));
+            historialInfo.append("--------------------------------------------------------------------------------------------------------\n");
+
+            // Recorrer los resultados y agregar las filas
             while (resultSet.next()) {
                 int idCompra = resultSet.getInt("id_compra");
                 String usuario = resultSet.getString("usuario");
@@ -407,17 +446,12 @@ public class Interfaz extends javax.swing.JFrame {
                 int cantidad = resultSet.getInt("cantidad");
                 String fecha = resultSet.getString("fecha");
 
-                // Agregar la información de la compra con un salto de línea al final
-                historialInfo.append("ID Compra: ").append(idCompra)
-                        .append(", Usuario: ").append(usuario)
-                        .append(", Producto: ").append(producto)
-                        .append(", Cantidad: ").append(cantidad)
-                        .append(", Fecha: ").append(fecha)
-                        .append("\n");
+                // Usar String.format para asegurar que los datos estén alineados
+                historialInfo.append(String.format("     %-10d \t %-20s \t %-20s \t %-10d \t %-20s\n", idCompra, usuario, producto, cantidad, fecha));
             }
 
-            // Establecer el texto en el JLabel
-            informacion.setText("<html>" + historialInfo.toString().replaceAll("\n", "<br/>") + "</html>");
+            // Mostrar el resultado en el JTextArea
+            informacion.setText(historialInfo.toString());
 
         } catch (SQLException e) {
             informacion.setText("Error al obtener el historial de compras: " + e.getMessage());
