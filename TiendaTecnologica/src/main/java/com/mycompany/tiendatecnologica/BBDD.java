@@ -13,6 +13,7 @@ public class BBDD {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
+    //metodo para conectar con la base de datos
    public static Connection getConnection() {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,7 +26,7 @@ public class BBDD {
     return null;
 }
 
-    // Método genérico para ejecutar inserciones
+    // metodo  para ejecutar inserciones
     private static void ejecutarInsercciones(String query, Object... parameters) {
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -39,38 +40,43 @@ public class BBDD {
         }
     }
 
-    // Métodos específicos para cada tabla
+    //metodo para insertar tienda
     public static void insertTienda(String nombreTienda) {
         String query = "INSERT INTO tienda (nombre) VALUES (?)";
         ejecutarInsercciones(query, nombreTienda);
     }
 
+    //metodo para insertar categoría
     public static void insertCategoria(int idCategoria, String categoriaNombre) {
         String query = "INSERT INTO categorias (id_categoria, nombre) VALUES (?, ?)";
        ejecutarInsercciones(query, idCategoria, categoriaNombre);
     }
 
+    //metodo para insertar producto
     public static void insertProducto(int idProducto, int idCategoria, String productoNombre, double precio, int inventario) {
         String query = "INSERT INTO productos (id_producto, id_categoria, nombre, precio, inventario) VALUES (?, ?, ?, ?, ?)";
         ejecutarInsercciones(query, idProducto, idCategoria, productoNombre, precio, inventario);
     }
 
+    //metodo para insertar usuario
     public static void insertUsuario(int idUsuario, String nombre, String email) {
         String query = "INSERT INTO usuarios (id_usuario, nombre, email) VALUES (?, ?, ?)";
         ejecutarInsercciones(query, idUsuario, nombre, email);
     }
 
+    //metodo para insertar direccion
     public static void insertDireccion(int idDireccion, int idUsuario, String calle, int numero, String ciudad, String pais) {
         String query = "INSERT INTO direcciones (id_direccion, id_usuario, calle, numero, ciudad, pais) VALUES (?, ?, ?, ?, ?, ?)";
         ejecutarInsercciones(query, idDireccion, idUsuario, calle, numero, ciudad, pais);
     }
 
+    //metodo para insertar historial de compra
     public static void insertHistorialCompra(int idUsuario, int idProducto, int cantidad, String fecha) {
         String query = "INSERT INTO historial_compras (id_usuario, id_producto, cantidad, fecha) VALUES (?, ?, ?, ?)";
         ejecutarInsercciones(query, idUsuario, idProducto, cantidad, fecha);
     }
 
-    // Método para procesar el JSON
+    // metodo para leer el JSON
     public static void readJSON(String filePath) {
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(filePath)) {
@@ -129,6 +135,7 @@ public class BBDD {
         }
     }
 
+    //metodo para guardar el historial de compra 
     static boolean hayDatos() {
         Connection connection = getConnection();
         String sql = "SELECT * FROM historial_compras";
