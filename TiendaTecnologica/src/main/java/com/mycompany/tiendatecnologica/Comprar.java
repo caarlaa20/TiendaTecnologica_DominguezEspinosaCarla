@@ -208,7 +208,7 @@ public class Comprar extends javax.swing.JFrame {
     //Metemos la información del usuario
     private void LblUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LblUsuarioActionPerformed
         JTextField campoBusqueda = this.LblUsuario;
-        seleccionarIdProducto(campoBusqueda);
+        seleccionarUsuarioPorId(campoBusqueda);
     }//GEN-LAST:event_LblUsuarioActionPerformed
 
     //Metemos la información del producto
@@ -220,7 +220,7 @@ public class Comprar extends javax.swing.JFrame {
     private void LblCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LblCantidadActionPerformed
 
     }//GEN-LAST:event_LblCantidadActionPerformed
-    
+
     //Boton para finalizar la compra
     private void CompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CompraMouseClicked
         JTextField campoIdProducto = this.LblProducto;
@@ -254,15 +254,20 @@ public class Comprar extends javax.swing.JFrame {
 
     //Finaliza la compra y me la inserta en la base de datos
     private void finalizarCompra(JTextField campoIdProducto, JTextField campoCantidad, JTextField campoIdUsuario) {
-     
+
         int idProducto = Integer.parseInt(campoIdProducto.getText().trim());
         int cantidad = Integer.parseInt(campoCantidad.getText().trim());
         int idUsuario = Integer.parseInt(campoIdUsuario.getText().trim());
 
         // Verificar si el producto existe
+        if (!verificarUsuarioExiste(idUsuario)) {
+            System.out.println("Error: El usuario con ID " + idUsuario + " no existe.");
+            return;
+        }
+        // Verificar si el producto existe
         if (!verificarProductoExiste(idProducto)) {
             System.out.println("Error: El producto con ID " + idProducto + " no existe.");
-            return; // Si no existe el producto, terminamos el proceso
+            return;
         }
 
         // Insertar el historial de compra
@@ -279,21 +284,6 @@ public class Comprar extends javax.swing.JFrame {
         }
     }
 
-    //Verifica si el producto existe para hacer la compra
-    private boolean verificarProductoExiste(int idProducto) {
-        Connection connection = BBDD.getConnection();
-        String query = "SELECT id_producto FROM productos WHERE id_producto = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, idProducto);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next(); 
-        } catch (SQLException e) {
-            System.out.println("Error al verificar el producto: " + e.getMessage());
-            return false;
-        }
-    }
-
     //Inserta la compra en el historial de compra
     private void insertHistorialCompra(int idUsuario, int idProducto, int cantidad, String fecha) throws SQLException {
         Connection connection = BBDD.getConnection();
@@ -304,44 +294,26 @@ public class Comprar extends javax.swing.JFrame {
             preparedStatement.setInt(2, idProducto);
             preparedStatement.setInt(3, cantidad);
             preparedStatement.setString(4, fecha);
-            preparedStatement.executeUpdate(); 
+            preparedStatement.executeUpdate();
         }
     }
 
-    //Selcciona el producto para hacer la compra
-    private void seleccionarIdProducto(JTextField campoBusqueda) {
+    //Verifica si el producto existe para hacer la compra
+    private boolean verificarProductoExiste(int idProducto) {
         Connection connection = BBDD.getConnection();
-        if (connection == null) {
-            System.out.println("Error: No se pudo establecer conexión con la base de datos.");
-            return;
-        }
-
-        
-        String criterio = campoBusqueda.getText().trim();
-        if (criterio.isEmpty()) {
-            System.out.println("Por favor, ingresa un criterio de búsqueda.");
-            return;
-        }
-
-        // Consulta SQL simple para obtener el ID del producto
-        String query = "SELECT id_producto FROM productos WHERE nombre LIKE ?";
+        String query = "SELECT id_producto FROM productos WHERE id_producto = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, "%" + criterio + "%"); 
+            preparedStatement.setInt(1, idProducto);
             ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int idProducto = resultSet.getInt("id_producto");
-                System.out.println("ID Producto: " + idProducto); 
-            }
-
+            return resultSet.next();
         } catch (SQLException e) {
-            System.out.println("Error al obtener el ID del producto: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error al verificar el producto: " + e.getMessage());
+            return false;
         }
     }
 
-     //Selecciona el id producto para hacer la compra
+    //Selecciona el id producto para hacer la compra
     private void seleccionarIdProductoPorId(JTextField campoBusqueda) {
         Connection connection = BBDD.getConnection();
         if (connection == null) {
@@ -349,7 +321,6 @@ public class Comprar extends javax.swing.JFrame {
             return;
         }
 
-        
         String criterio = campoBusqueda.getText().trim();
         if (criterio.isEmpty()) {
             System.out.println("Por favor, ingresa un ID de producto.");
@@ -359,7 +330,7 @@ public class Comprar extends javax.swing.JFrame {
         // Comprobar si el texto ingresado es un número entero
         int idProducto;
         try {
-            idProducto = Integer.parseInt(criterio);  
+            idProducto = Integer.parseInt(criterio);
         } catch (NumberFormatException e) {
             System.out.println("El ID debe ser un número entero.");
             return;
@@ -401,7 +372,7 @@ public class Comprar extends javax.swing.JFrame {
         // Comprobar si la cantidad ingresada es un número entero positivo
         int cantidad;
         try {
-            cantidad = Integer.parseInt(cantidadStr); 
+            cantidad = Integer.parseInt(cantidadStr);
             if (cantidad <= 0) {
                 System.out.println("La cantidad debe ser un número positivo.");
                 return;
@@ -415,7 +386,7 @@ public class Comprar extends javax.swing.JFrame {
         String query = "SELECT inventario FROM productos WHERE id_producto = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, idProducto); 
+            preparedStatement.setInt(1, idProducto);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // Verificar si el producto existe en la base de datos
@@ -426,10 +397,10 @@ public class Comprar extends javax.swing.JFrame {
                 // Verificar si hay suficiente inventario
                 if (cantidad > inventario) {
                     System.out.println("Error: No hay suficiente inventario para esta cantidad. Inventario disponible: " + inventario);
-                    return;  
+                    return;
                 } else {
                     System.out.println("Cantidad seleccionada: " + cantidad);
-                   
+
                 }
             } else {
                 System.out.println("Error: Producto con ID " + idProducto + " no encontrado.");
@@ -437,6 +408,63 @@ public class Comprar extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             System.out.println("Error al verificar el inventario: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Verifica si el usuario existe
+    private boolean verificarUsuarioExiste(int idUsuario) {
+        Connection connection = BBDD.getConnection();
+        //Sentencia Sql que utilizamos
+        String query = "SELECT id_usuario FROM usuarios WHERE id_usuario = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idUsuario);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("Error al verificar el usuario: " + e.getMessage());
+            return false;
+        }
+    }
+
+// Selecciona el usuario por ID para realizar operaciones relacionadas
+    private void seleccionarUsuarioPorId(JTextField campoBusqueda) {
+        Connection connection = BBDD.getConnection();
+        if (connection == null) {
+            System.out.println("Error: No se pudo establecer conexión con la base de datos.");
+            return;
+        }
+
+        String criterio = campoBusqueda.getText().trim();
+        if (criterio.isEmpty()) {
+            System.out.println("Por favor, ingresa un ID de usuario.");
+            return;
+        }
+
+        // Comprobar si el texto ingresado es un número entero
+        int idUsuario;
+        try {
+            idUsuario = Integer.parseInt(criterio);
+        } catch (NumberFormatException e) {
+            System.out.println("El ID debe ser un número entero.");
+            return;
+        }
+
+        // Consulta SQL para verificar si el ID de usuario existe
+        String query = "SELECT id_usuario FROM usuarios WHERE id_usuario = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, idUsuario);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                System.out.println("Usuario con ID " + idUsuario + " encontrado.");
+            } else {
+                System.out.println("Error: Usuario con ID " + idUsuario + " no encontrado.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener el usuario: " + e.getMessage());
             e.printStackTrace();
         }
     }
